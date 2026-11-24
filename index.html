@@ -42,7 +42,7 @@ h1,h2,h3,.logo-txt{font-family:'Bricolage Grotesque',sans-serif;line-height:1.05
 header{position:sticky;top:0;z-index:50;background:var(--azul);color:#fff}
 .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo img{width:44px;height:44px;border-radius:12px;object-fit:cover}
+.logo img{width:52px;height:44px;border-radius:12px;object-fit:contain}
 .logo-txt{font-weight:800;font-size:1.25rem}
 .menu{display:flex;align-items:center;gap:28px;list-style:none}
 .menu a{text-decoration:none;font-weight:500;position:relative}
@@ -53,15 +53,16 @@ header{position:sticky;top:0;z-index:50;background:var(--azul);color:#fff}
 
 /* Hero */
 .hero{background:var(--azul);color:#fff;position:relative;overflow:hidden;padding:56px 0 90px}
-.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 .pill{display:inline-block;background:rgba(248,206,215,.16);color:var(--rosa);padding:6px 16px;border-radius:999px;font-weight:700;font-size:.9rem;margin-bottom:20px}
 .hero h1{font-size:clamp(2.5rem,6vw,4.6rem);font-weight:800;margin-bottom:20px}
 .hero h1 em{font-style:normal;color:var(--rosa)}
 .hero p{font-size:1.15rem;max-width:30em;margin-bottom:30px;color:#E8EDFB}
 .acciones{display:flex;flex-wrap:wrap;gap:14px}
-.hero-foto{position:relative;aspect-ratio:1/1.05}
-.blob-rosa{position:absolute;inset:6% -8% -6% 10%;background:var(--rosa);border-radius:58% 42% 55% 45%/48% 58% 42% 52%}
-.hero-foto .ph{position:absolute;inset:0;border-radius:45% 55% 40% 60%/55% 40% 60% 45%;transform:rotate(-3deg)}
+.hero-foto{position:relative;aspect-ratio:1/.9}
+.blob-rosa{position:absolute;inset:8% -6% -8% 8%;background:var(--rosa);border-radius:58% 42% 55% 45%/48% 58% 42% 52%}
+.hero-foto .ph{position:absolute;inset:0;border-radius:40% 60% 45% 55%/50% 40% 60% 50%;transform:rotate(-2deg)}
+.hero-foto .ph img{object-position:45% 50%}
 .blob-lima{position:absolute;width:90px;height:90px;background:var(--lima);border-radius:50% 50% 45% 55%;left:-14px;bottom:8%}
 .blob-cel{position:absolute;width:150px;height:150px;background:var(--celeste);border-radius:60% 40% 55% 45%;right:-40px;top:-50px;opacity:.5}
 
@@ -96,24 +97,27 @@ h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;margin-bottom:14px;color:v
 .google{display:inline-flex;align-items:center;gap:8px;background:var(--crema);padding:10px 20px;border-radius:999px;text-decoration:none;font-weight:700;transition:transform .2s}
 .google:hover{transform:translateY(-3px)}
 .google b{color:var(--naranja)}
-.galeria{display:grid;grid-template-columns:1.5fr 1fr;grid-template-rows:240px 240px;gap:16px}
+.galeria{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:240px 240px;gap:16px}
 .galeria .ph{border-radius:28px}
 .galeria .ph:first-child{grid-row:span 2;border-radius:28px 120px 28px 28px}
+.galeria .ph:first-child img{object-position:50% 25%}
 .galeria .ph:last-child{border-radius:28px 28px 28px 90px}
 
 /* Ubicación */
 .ubi{background:var(--azul);color:#fff;position:relative;overflow:hidden}
-.ubi .wrap{position:relative}
+.ubi .wrap{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
 .ubi h2{color:#fff}
-.dir{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:700;color:var(--rosa);margin-bottom:8px}
+.dir{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.6rem,3.6vw,2.4rem);font-weight:700;color:var(--rosa);margin-bottom:8px}
 .ubi p{margin-bottom:26px;max-width:34em;color:#E8EDFB}
 .ubi .blob{position:absolute;right:-60px;bottom:-80px;width:340px;height:340px;background:var(--rosa);opacity:.14;border-radius:55% 45% 60% 40%/50% 60% 40% 50%}
+.ubi .ph{aspect-ratio:4/3;border-radius:28px 28px 90px 28px}
+.ubi .ph img{object-position:45% 50%}
 .hor a{color:var(--rosa);font-weight:700}
 
 /* Pie */
 footer{background:var(--tinta);color:#fff;padding:44px 0}
 .pie{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:22px}
-.pie .logo img{width:54px;height:54px}
+.pie .logo img{width:63px;height:54px}
 .amor{font-family:'Caveat',cursive;font-size:2rem;color:var(--rosa);line-height:1}
 .redes{display:flex;gap:18px;flex-wrap:wrap}
 .redes a{color:#fff;font-weight:700}
@@ -143,7 +147,7 @@ footer{background:var(--tinta);color:#fff;padding:44px 0}
   .menu .btn{width:100%}
   .hero{padding:36px 0 70px}
   .hero .wrap{grid-template-columns:1fr}
-  .hero-foto{max-width:420px;margin:10px auto 0;width:92%}
+  .hero-foto{margin:10px auto 0;width:94%}
   .acciones .btn{flex:1 1 150px}
   .destacados{grid-template-columns:1fr 1fr;gap:14px}
   .card:nth-child(even){transform:none}
@@ -152,8 +156,9 @@ footer{background:var(--tinta);color:#fff;padding:44px 0}
   .card h3{font-size:1.1rem}
   .carta-cta{margin-top:30px}
   section{padding:64px 0}
-  .galeria{grid-template-columns:1fr 1fr;grid-template-rows:260px 170px}
-  .galeria .ph:first-child{grid-row:auto;grid-column:span 2}
+  .galeria{grid-template-rows:300px 150px}
+  .galeria .ph:first-child{grid-row:span 2}
+  .ubi .wrap{grid-template-columns:1fr;gap:30px}
 }
 @media(max-width:380px){.destacados{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){
@@ -167,7 +172,7 @@ footer{background:var(--tinta);color:#fff;padding:44px 0}
 <header>
   <div class="wrap nav">
     <a class="logo" href="#inicio" aria-label="Divina, ir al inicio">
-      <img src="logo.png" alt="Logo de Divina" width="44" height="44">
+      <img src="logo.png" alt="Logo de Divina" width="52" height="44">
       <span class="logo-txt">Divina</span>
     </a>
     <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">☰</button>
@@ -196,7 +201,7 @@ footer{background:var(--tinta);color:#fff;padding:44px 0}
     <div class="hero-foto">
       <div class="blob-cel"></div>
       <div class="blob-rosa"></div>
-      <div class="ph"><img src="hero.jpg" alt="Café servido en Divina, Villa Devoto" onerror="this.remove()"></div>
+      <div class="ph"><img src="hero.jpg" alt="La esquina azul de Divina en Villa Devoto, con mesas en la vereda" width="1440" height="810" onerror="this.remove()"></div>
       <div class="blob-lima"></div>
     </div>
   </div>
@@ -249,7 +254,7 @@ footer{background:var(--tinta);color:#fff;padding:44px 0}
       <a class="google rev" href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">⭐ <b>4,7</b> en Google · ver reseñas</a>
     </div>
     <div class="galeria">
-      <div class="ph rev-img"><img src="lugar-1.jpg" alt="Fachada azul de Divina en Villa Devoto" loading="lazy" onerror="this.remove()"></div>
+      <div class="ph rev-img"><img src="lugar-1.jpg" alt="Dos personas sonriendo en la vereda de Divina, junto a unos barriles y una sombrilla" loading="lazy" onerror="this.remove()"></div>
       <div class="ph rev-img"><img src="lugar-2.jpg" alt="Interior de Divina" loading="lazy" onerror="this.remove()"></div>
       <div class="ph rev-img"><img src="lugar-3.jpg" alt="Detalle de café y panadería" loading="lazy" onerror="this.remove()"></div>
     </div>
@@ -260,14 +265,17 @@ footer{background:var(--tinta);color:#fff;padding:44px 0}
 <section class="ubi" id="ubicacion">
   <div class="blob"></div>
   <div class="wrap">
-    <span class="tag rev" style="color:var(--rosa)">Ubicación</span>
-    <h2 class="rev">Te esperamos</h2>
-    <div class="dir rev">Concordia 4723, Villa Devoto</div>
-    <p class="rev hor">Ciudad Autónoma de Buenos Aires. <a href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">Consultar horarios en Google Maps</a></p>
-    <div class="acciones rev">
-      <a class="btn btn-rosa" href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar</a>
-      <a class="btn btn-linea" href="tel:+5491136189773">Llamar</a>
+    <div>
+      <span class="tag rev" style="color:var(--rosa)">Ubicación</span>
+      <h2 class="rev">Te esperamos</h2>
+      <div class="dir rev">Concordia 4723, Villa Devoto</div>
+      <p class="rev hor">Ciudad Autónoma de Buenos Aires. Buscá la esquina azul. <a href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">Consultar horarios en Google Maps</a></p>
+      <div class="acciones rev">
+        <a class="btn btn-rosa" href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar</a>
+        <a class="btn btn-linea" href="tel:+5491136189773">Llamar</a>
+      </div>
     </div>
+    <div class="ph rev-img"><img src="hero.jpg" alt="Frente de Divina en la esquina, con el cartel sobre la fachada azul" loading="lazy" onerror="this.remove()"></div>
   </div>
 </section>
 </main>
@@ -276,7 +284,7 @@ footer{background:var(--tinta);color:#fff;padding:44px 0}
   <div class="wrap">
     <div class="pie">
       <div>
-        <a class="logo" href="#inicio"><img src="logo.png" alt="Logo de Divina" width="54" height="54"><span class="logo-txt">Divina</span></a>
+        <a class="logo" href="#inicio"><img src="logo.png" alt="Logo de Divina" width="63" height="54"><span class="logo-txt">Divina</span></a>
         <div class="amor" style="margin-top:8px">Hecho con amor</div>
       </div>
       <div class="redes">
