@@ -41,6 +41,9 @@ h1,h2,h3,.logo-txt{font-family:'Bricolage Grotesque',sans-serif;line-height:1.05
 .btn-linea:hover{background:rgba(248,206,215,.12)}
 .btn-azul{background:var(--azul);color:#fff}
 .btn-borde{border-color:var(--azul);color:var(--azul);background:transparent}
+.btn-ig{padding:14px 18px}
+.btn-ig svg{transition:transform .35s}
+.btn-ig:hover svg{transform:rotate(-12deg) scale(1.15)}
 
 /* Estrellitas */
 .est{position:absolute;width:var(--s,28px);height:var(--s,28px);pointer-events:none;animation:tw 3.2s ease-in-out infinite}
@@ -195,10 +198,10 @@ h2::after{content:"";display:block;width:80px;height:7px;margin-top:12px;border-
 mark{background:linear-gradient(var(--naranja),var(--naranja)) no-repeat 0 92%/100% 38%;color:inherit;padding:0 2px;opacity:1}
 .js mark{background-size:0 38%;transition:background-size .9s .5s}
 .js .rv.in mark{background-size:100% 38%}
-.flechas{display:flex;gap:10px;justify-content:flex-end;margin-top:4px}
+.flechas{display:flex;gap:12px;justify-content:center;margin-top:6px}
 .flecha{width:50px;height:50px;border-radius:50%;border:2px solid var(--azul);background:#fff;color:var(--azul);font-size:1.3rem;cursor:pointer;transition:transform .2s,background .2s,color .2s}
 .flecha:hover{background:var(--azul);color:#fff;transform:scale(1.1)}
-.res-cta{margin-top:18px}
+.res-cta{margin-top:22px;text-align:center}
 
 /* Seguinos */
 .seguinos{background:var(--celeste);text-align:center;overflow:hidden}
@@ -222,18 +225,33 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 .pie-logo{display:inline-flex;align-items:center;gap:12px}
 .pie-logo img{width:63px;height:54px;border-radius:12px;object-fit:contain}
 .amor{font-family:'Caveat',cursive;font-size:2rem;color:var(--rosa);line-height:1}
-.redes{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.redes{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;align-items:center}
 .redes a,.creditos a{font-weight:700}
+.redes a.ig{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:50%;border:2px solid var(--rosa);color:var(--rosa);text-decoration:none;transition:background .25s,color .25s,transform .25s}
+.redes a.ig:hover{background:var(--rosa);color:var(--azul);transform:translateY(-3px) rotate(-8deg)}
 .copy{opacity:.7;font-size:.85rem}
 .creditos a svg{vertical-align:-1px;margin-left:3px}
 
 /* Flotantes */
 .llamar{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:inline-flex;align-items:center;gap:8px;background:var(--rosa);color:var(--azul);font-weight:700;text-decoration:none;padding:13px 20px;border-radius:999px;border:2px solid var(--azul);box-shadow:0 6px 18px rgba(0,0,0,.28);transition:transform .2s}
 .llamar:hover{transform:translateY(-3px)}
-.subir{position:fixed;right:16px;bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:39;width:48px;height:48px;border-radius:50%;border:2px solid var(--crema);background:var(--azul);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.25);opacity:0;transform:translateY(16px) scale(.8);pointer-events:none;transition:opacity .3s,transform .3s,background .2s;-webkit-tap-highlight-color:transparent}
-.subir.ver{opacity:1;transform:none;pointer-events:auto}
-.subir:hover{background:var(--tinta)}
 .barra{display:none}
+
+/* Flecha de subir con efectos */
+.subir{position:fixed;right:18px;bottom:calc(82px + env(safe-area-inset-bottom,0px));z-index:39;width:52px;height:52px;border-radius:50%;border:0;background:var(--azul);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.3);opacity:0;transform:translateY(20px) scale(.7);pointer-events:none;transition:opacity .35s,transform .35s cubic-bezier(.3,1.6,.5,1),background .25s,color .25s;-webkit-tap-highlight-color:transparent}
+.subir.ver{opacity:1;transform:none;pointer-events:auto}
+.subir.ver:hover{transform:translateY(-5px) scale(1.1);background:var(--rosa);color:var(--azul)}
+.subir.ver:active{transform:scale(.92)}
+.subir::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--rosa);opacity:0;animation:onda 2.4s ease-out infinite}
+@keyframes onda{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.8);opacity:0}}
+.subir .anillo{position:absolute;inset:-6px;width:calc(100% + 12px);height:calc(100% + 12px);transform:rotate(-90deg);pointer-events:none}
+.subir .anillo circle{fill:none;stroke-width:3.5}
+.subir .anillo .base{stroke:rgba(36,68,154,.18)}
+.subir .anillo .prog{stroke:var(--naranja);stroke-linecap:round;stroke-dasharray:176;stroke-dashoffset:calc(176 * (1 - var(--q,0)))}
+.subir .up{position:relative;animation:rebota 1.7s ease-in-out infinite}
+@keyframes rebota{0%,100%{transform:translateY(3px)}50%{transform:translateY(-3px)}}
+.subir.vuela .up{animation:vuela .7s ease-in both}
+@keyframes vuela{0%{transform:translateY(0);opacity:1}55%{transform:translateY(-46px);opacity:0}56%{transform:translateY(34px);opacity:0}100%{transform:translateY(0);opacity:1}}
 
 /* Entradas */
 @keyframes sube{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
@@ -262,6 +280,7 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   .hero .wrap,.merienda .wrap,.ubi .wrap,.res-top,.eventos .wrap{grid-template-columns:1fr;gap:30px}
   .hero-foto{margin:10px auto 0;width:94%}
   .acciones .btn{flex:1 1 150px}
+  .seguinos .btn-ig{flex:0 0 auto}
   .picks{grid-template-columns:1fr 1fr;gap:12px}
   .pick{min-height:160px;padding:16px}
   .pick h3{font-size:1.2rem}
@@ -275,7 +294,7 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   .llamar{display:none}
   .barra{position:fixed;left:0;right:0;bottom:0;z-index:45;display:flex;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:var(--azul);box-shadow:0 -6px 20px rgba(23,34,58,.25)}
   .barra .btn{flex:1;padding:12px 10px}
-  .subir{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .subir{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
   body{padding-bottom:70px}
   .flechas{display:none}
 }
@@ -288,7 +307,11 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="est" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z"/></symbol></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="est" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z"/></symbol>
+  <symbol id="ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></g><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></symbol>
+  <symbol id="lnk" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+</svg>
 <div class="progreso" aria-hidden="true"></div>
 
 <header>
@@ -477,10 +500,10 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   <div class="wrap">
     <span class="tag rev">Redes</span>
     <h2 class="rev">Seguinos en Instagram</h2>
-    <p class="rev">Novedades y cosas ricas de Divina en @divina_delicity.</p>
+    <p class="rev">Novedades y cosas ricas de Divina en nuestras redes.</p>
     <div class="acciones rev">
-      <a class="btn btn-azul" href="https://www.instagram.com/divina_delicity/" target="_blank" rel="noopener">@divina_delicity</a>
-      <a class="btn btn-borde" href="https://linktr.ee/divina_delicity" target="_blank" rel="noopener">Linktree oficial</a>
+      <a class="btn btn-azul btn-ig" href="https://www.instagram.com/divina_delicity/" target="_blank" rel="noopener" aria-label="Instagram de Divina"><svg width="26" height="26" aria-hidden="true"><use href="#ig"/></svg></a>
+      <a class="btn btn-borde" href="https://linktr.ee/divina_delicity" target="_blank" rel="noopener"><svg width="20" height="20" aria-hidden="true"><use href="#lnk"/></svg>Links oficiales</a>
     </div>
   </div>
 </section>
@@ -510,8 +533,8 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
     <span class="pie-logo"><img src="logo.png" alt="Logo de Divina" width="63" height="54"><span class="amor">Hecho con amor</span></span>
     <span>Concordia 4723, Villa Devoto · Buenos Aires</span>
     <div class="redes">
-      <a href="https://www.instagram.com/divina_delicity/" target="_blank" rel="noopener">@divina_delicity</a>
-      <a href="https://linktr.ee/divina_delicity" target="_blank" rel="noopener">Linktree</a>
+      <a class="ig" href="https://www.instagram.com/divina_delicity/" target="_blank" rel="noopener" aria-label="Instagram de Divina"><svg width="24" height="24" aria-hidden="true"><use href="#ig"/></svg></a>
+      <a href="https://linktr.ee/divina_delicity" target="_blank" rel="noopener">Links oficiales</a>
       <a href="tel:+5491136189773">011 15-3618-9773</a>
     </div>
     <span class="copy">© 2026 Divina – Delicias &amp; Amor</span>
@@ -524,7 +547,10 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   <a class="btn btn-linea" href="tel:+5491136189773">Llamar</a>
 </div>
 <a class="llamar" href="tel:+5491136189773" aria-label="Llamar a Divina"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.6 3.6a1 1 0 0 1-.25 1z"/></svg>Llamar</a>
-<button class="subir" type="button" aria-label="Volver arriba"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<button class="subir" type="button" aria-label="Volver arriba">
+  <svg class="anillo" viewBox="0 0 64 64" aria-hidden="true"><circle class="base" cx="32" cy="32" r="28"/><circle class="prog" cx="32" cy="32" r="28"/></svg>
+  <svg class="up" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
 <script>
 /* ============ CARTA ============
@@ -684,15 +710,19 @@ var CARTA=[
 
   var root=document.documentElement,bar=document.querySelector('.progreso'),head=document.querySelector('header'),sub=document.querySelector('.subir'),tick=false;
   function onScroll(){
-    var y=window.pageYOffset||root.scrollTop,h=root.scrollHeight-window.innerHeight;
-    bar.style.setProperty('--p',h>0?Math.min(1,y/h).toFixed(4):0);
+    var y=window.pageYOffset||root.scrollTop,h=root.scrollHeight-window.innerHeight,q=h>0?Math.min(1,y/h):0;
+    bar.style.setProperty('--p',q.toFixed(4));
+    sub.style.setProperty('--q',q.toFixed(4));
     head.classList.toggle('scrolled',y>10);
     sub.classList.toggle('ver',y>500);
     if(!reduce){sy=Math.min(y,900);par()}
     tick=false;
   }
   window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});
-  sub.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+  sub.addEventListener('click',function(){
+    sub.classList.add('vuela');setTimeout(function(){sub.classList.remove('vuela')},750);
+    window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+  });
   onScroll();
 })();
 </script>
