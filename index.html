@@ -32,7 +32,7 @@ h1,h2,h3,.logo-txt{font-family:'Bricolage Grotesque',sans-serif;line-height:1.05
 /* Barra de progreso */
 .progreso{position:fixed;top:0;left:0;right:0;height:4px;z-index:60;transform-origin:0 50%;transform:scaleX(var(--p,0));background:linear-gradient(90deg,var(--rosa),var(--celeste),var(--lima));pointer-events:none}
 
-/* Botones (con efecto magnético en escritorio) */
+/* Botones */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid transparent;transition:transform .25s,box-shadow .25s,background .2s;cursor:pointer;font-size:1rem;font-family:inherit}
 .btn:hover{transform:translateY(-3px);box-shadow:0 8px 0 rgba(23,34,58,.18)}
 .btn:active{transform:translateY(0);box-shadow:none}
@@ -80,7 +80,7 @@ header.scrolled{box-shadow:0 6px 20px rgba(23,34,58,.25)}
 .ola.b{bottom:-1px}
 .ola.t{top:-1px;transform:rotate(180deg)}
 
-/* Cinta en movimiento */
+/* Cinta */
 .cinta{background:var(--azul);color:var(--rosa);transform:rotate(-1.2deg);width:104%;margin:-34px 0 0 -2%;position:relative;z-index:3;overflow:hidden;padding:14px 0;border-block:3px solid var(--rosa);font:800 1.15rem 'Bricolage Grotesque',sans-serif;white-space:nowrap}
 .cinta-in{display:inline-flex;animation:marq 30s linear infinite}
 .cinta span{padding-right:.6em}
@@ -146,18 +146,59 @@ h2::after{content:"";display:block;width:80px;height:7px;margin-top:12px;border-
 .galeria .ph:first-child img{object-position:50% 25%}
 .galeria .ph:last-child{border-radius:28px 28px 28px 90px}
 
+/* Eventos */
+.eventos{background:var(--lima);overflow:hidden}
+.eventos h2::after{background:var(--azul)}
+.eventos .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;position:relative}
+.eventos p{max-width:32em;margin-bottom:24px}
+.tipos{display:flex;flex-wrap:wrap;gap:12px}
+.tipos span{font:800 1.25rem 'Bricolage Grotesque',sans-serif;padding:12px 22px;border-radius:999px;background:#fff;color:var(--azul);border:3px solid var(--azul);transition:transform .3s;animation:flota 4s ease-in-out infinite alternate}
+.tipos span:nth-child(2n){background:var(--rosa);animation-delay:.7s}
+.tipos span:nth-child(3n){background:var(--celeste);animation-delay:1.3s}
+.tipos span:hover{transform:rotate(-4deg) scale(1.06)}
+@keyframes flota{to{transform:translateY(-8px)}}
+
 /* Reseñas */
-.resenas .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:center}
+.resenas{background:var(--crema);overflow:hidden}
+.res-top{display:grid;grid-template-columns:.7fr 1.3fr;gap:44px;align-items:center;margin-bottom:34px}
 .nota-g{text-align:center}
 .num-g{font:800 clamp(5.5rem,14vw,9rem)/.9 'Bricolage Grotesque',sans-serif;color:var(--azul)}
 .estr{color:var(--naranja);font-size:2rem;letter-spacing:.1em}
+.estr span{display:inline-block}
+.js .nota-g.in .estr span{animation:pop .55s calc(var(--k)*.12s + .3s) both}
+@keyframes pop{0%{transform:scale(0) rotate(-40deg)}70%{transform:scale(1.35) rotate(8deg)}100%{transform:scale(1)}}
 .nota-g div:last-child{font-weight:700}
-.chips{display:flex;flex-wrap:wrap;gap:12px;margin:6px 0 22px}
-.chips span{background:#fff;border:2px solid var(--azul);color:var(--azul);font-weight:700;padding:9px 18px;border-radius:999px;animation:flota 4s ease-in-out infinite alternate}
-.chips span:nth-child(2){animation-delay:.6s;background:var(--rosa)}
-.chips span:nth-child(3){animation-delay:1.2s;background:var(--lima)}
-.chips span:nth-child(4){animation-delay:1.8s;background:var(--celeste)}
-@keyframes flota{to{transform:translateY(-8px)}}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin:6px 0 14px}
+.chip{border:2px solid var(--azul);color:var(--azul);background:#fff;font:700 1rem 'DM Sans',sans-serif;padding:9px 18px;border-radius:999px;cursor:pointer;transition:transform .25s,background .2s,color .2s}
+.chip:nth-child(2n){background:var(--rosa)}
+.chip:nth-child(3n){background:var(--celeste)}
+.chip:nth-child(5n){background:var(--lima)}
+.chip:hover{transform:translateY(-4px) rotate(-2deg)}
+.chip[aria-pressed="true"]{background:var(--azul);color:#fff;transform:scale(1.08)}
+.hint{font-size:.9rem;color:#5b6784}
+.carr-wrap{position:relative}
+.carr{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:22px 4px 26px;scrollbar-width:none}
+.carr::-webkit-scrollbar{display:none}
+.rv{flex:0 0 min(340px,82vw);scroll-snap-align:start;border-radius:28px;padding:30px 26px 24px;position:relative;rotate:var(--r,0deg);scale:1;transition:rotate .4s,scale .4s,opacity .4s,filter .4s,box-shadow .4s;box-shadow:0 10px 26px rgba(36,68,154,.12);display:flex;flex-direction:column;gap:14px;min-height:300px}
+.rv:nth-child(1){background:var(--rosa);--r:-1.6deg}
+.rv:nth-child(2){background:#fff;--r:1.2deg}
+.rv:nth-child(3){background:var(--celeste);--r:-1deg}
+.rv:nth-child(4){background:var(--lima);--r:1.5deg}
+.rv:nth-child(5){background:#fff;--r:-1.3deg}
+@media(hover:hover){.rv:hover{rotate:0deg;scale:1.04;box-shadow:0 18px 36px rgba(36,68,154,.22)}}
+.rv::before{content:"“";position:absolute;top:-6px;right:20px;font:800 7rem/1 'Bricolage Grotesque',sans-serif;color:var(--azul);opacity:.18;animation:flota 3.5s ease-in-out infinite alternate}
+.rv .s{color:var(--naranja);letter-spacing:.12em;font-size:1.1rem}
+.rv q{quotes:none;font-size:1.08rem;line-height:1.5;font-weight:500}
+.rv footer{background:none;padding:0;margin-top:auto;text-align:left;display:block;font-size:.92rem;color:var(--tinta)}
+.rv footer b{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:1.05rem}
+.rv.dim{opacity:.3;filter:grayscale(.5);scale:.95}
+mark{background:linear-gradient(var(--naranja),var(--naranja)) no-repeat 0 92%/100% 38%;color:inherit;padding:0 2px;opacity:1}
+.js mark{background-size:0 38%;transition:background-size .9s .5s}
+.js .rv.in mark{background-size:100% 38%}
+.flechas{display:flex;gap:10px;justify-content:flex-end;margin-top:4px}
+.flecha{width:50px;height:50px;border-radius:50%;border:2px solid var(--azul);background:#fff;color:var(--azul);font-size:1.3rem;cursor:pointer;transition:transform .2s,background .2s,color .2s}
+.flecha:hover{background:var(--azul);color:#fff;transform:scale(1.1)}
+.res-cta{margin-top:18px}
 
 /* Seguinos */
 .seguinos{background:var(--celeste);text-align:center;overflow:hidden}
@@ -176,8 +217,8 @@ h2::after{content:"";display:block;width:80px;height:7px;margin-top:12px;border-
 .hor a{color:var(--rosa);font-weight:700}
 
 /* Pie */
-footer{background:var(--tinta);color:#fff;padding:40px 0;text-align:center;font-size:.95rem}
-footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+footer.pie{background:var(--tinta);color:#fff;padding:40px 0;text-align:center;font-size:.95rem}
+footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 .pie-logo{display:inline-flex;align-items:center;gap:12px}
 .pie-logo img{width:63px;height:54px;border-radius:12px;object-fit:contain}
 .amor{font-family:'Caveat',cursive;font-size:2rem;color:var(--rosa);line-height:1}
@@ -186,7 +227,7 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 .copy{opacity:.7;font-size:.85rem}
 .creditos a svg{vertical-align:-1px;margin-left:3px}
 
-/* Flotantes: llamar, subir y barra del celular */
+/* Flotantes */
 .llamar{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:inline-flex;align-items:center;gap:8px;background:var(--rosa);color:var(--azul);font-weight:700;text-decoration:none;padding:13px 20px;border-radius:999px;border:2px solid var(--azul);box-shadow:0 6px 18px rgba(0,0,0,.28);transition:transform .2s}
 .llamar:hover{transform:translateY(-3px)}
 .subir{position:fixed;right:16px;bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:39;width:48px;height:48px;border-radius:50%;border:2px solid var(--crema);background:var(--azul);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.25);opacity:0;transform:translateY(16px) scale(.8);pointer-events:none;transition:opacity .3s,transform .3s,background .2s;-webkit-tap-highlight-color:transparent}
@@ -194,7 +235,7 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 .subir:hover{background:var(--tinta)}
 .barra{display:none}
 
-/* Animaciones de entrada */
+/* Entradas */
 @keyframes sube{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
 @keyframes entra{from{opacity:0;transform:scale(.88) rotate(4deg)}to{opacity:1}}
 .hero .pill{animation:sube .7s both}
@@ -202,6 +243,8 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 .hero .acciones{animation:sube .7s .7s both}
 .js .rev{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
 .js .rev.in{opacity:1;transform:none}
+.js .rv.rev{transform:translateY(40px) scale(.94)}
+.js .rv.rev.in{transform:none}
 .js h2.rev::after{transform:scaleX(0);transform-origin:left;transition:transform .8s .35s}
 .js h2.rev.in::after{transform:none}
 .js .seguinos h2.rev::after{transform-origin:center}
@@ -216,7 +259,7 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   .menu li{padding:12px 0}
   .menu .btn{width:100%}
   .hero{padding:36px 0 100px}
-  .hero .wrap,.merienda .wrap,.ubi .wrap,.resenas .wrap{grid-template-columns:1fr;gap:30px}
+  .hero .wrap,.merienda .wrap,.ubi .wrap,.res-top,.eventos .wrap{grid-template-columns:1fr;gap:30px}
   .hero-foto{margin:10px auto 0;width:94%}
   .acciones .btn{flex:1 1 150px}
   .picks{grid-template-columns:1fr 1fr;gap:12px}
@@ -234,10 +277,12 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   .barra .btn{flex:1;padding:12px 10px}
   .subir{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
   body{padding-bottom:70px}
+  .flechas{display:none}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .js .rev,.js .rev-img{opacity:1;transform:none;clip-path:none}
+  .js mark{background-size:100% 38%}
   .progreso{display:none}
 }
 </style>
@@ -345,20 +390,83 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   </div>
 </section>
 
+<!-- EVENTOS -->
+<section class="eventos" id="eventos">
+  <svg class="est" viewBox="0 0 24 24" style="top:12%;left:5%;--s:34px;color:var(--azul)" aria-hidden="true"><use href="#est"/></svg>
+  <svg class="est" viewBox="0 0 24 24" style="bottom:12%;right:6%;--s:40px;color:var(--rosa);animation-delay:.9s" aria-hidden="true"><use href="#est"/></svg>
+  <div class="wrap">
+    <div>
+      <span class="tag rev">Eventos</span>
+      <h2 class="rev">Festejá en Divina</h2>
+      <p class="rev">Organizá tu evento acá. Escribinos o llamanos y hacé tu reserva.</p>
+      <div class="acciones rev">
+        <a class="btn btn-azul" href="tel:+5491136189773">Hacé tu reserva</a>
+        <a class="btn btn-borde" href="https://www.instagram.com/divina_delicity/" target="_blank" rel="noopener">Escribinos por Instagram</a>
+      </div>
+    </div>
+    <div class="tipos rev"><span>Cumpleaños</span><span>Despedidas</span><span>Bautismos</span><span>Reuniones de trabajo</span><span>y más</span></div>
+  </div>
+</section>
+
 <!-- RESEÑAS -->
 <section class="resenas">
   <div class="wrap">
-    <div class="nota-g rev">
-      <div class="num-g"><span id="num" data-to="4.7">4,7</span></div>
-      <div class="estr" role="img" aria-label="4,7 de 5 estrellas">★★★★★</div>
-      <div>en Google</div>
+    <div class="res-top">
+      <div class="nota-g rev">
+        <div class="num-g"><span id="num" data-to="4.7">4,7</span></div>
+        <div class="estr" role="img" aria-label="4,7 de 5 estrellas"><span style="--k:0">★</span><span style="--k:1">★</span><span style="--k:2">★</span><span style="--k:3">★</span><span style="--k:4">★</span></div>
+        <div>en Google</div>
+      </div>
+      <div>
+        <span class="tag rev">Reseñas</span>
+        <h2 class="rev">Lo que más se repite</h2>
+        <div class="chips rev" id="chips" role="group" aria-label="Filtrar reseñas por tema">
+          <button class="chip" type="button" data-t="atencion" aria-pressed="false">Atención</button>
+          <button class="chip" type="button" data-t="cafe" aria-pressed="false">Café</button>
+          <button class="chip" type="button" data-t="alfajores" aria-pressed="false">Alfajores</button>
+          <button class="chip" type="button" data-t="casero" aria-pressed="false">Casero</button>
+          <button class="chip" type="button" data-t="terraza" aria-pressed="false">Terraza</button>
+          <button class="chip" type="button" data-t="ambiente" aria-pressed="false">Ambiente cálido</button>
+        </div>
+        <p class="hint rev">Tocá una palabra y mirá qué dicen sobre eso.</p>
+      </div>
     </div>
-    <div>
-      <span class="tag rev">Reseñas</span>
-      <h2 class="rev">Lo que más se repite</h2>
-      <div class="chips rev"><span>El café</span><span>Dulce y salado</span><span>Recién horneado</span><span>Atención amable</span></div>
-      <div class="rev"><a class="btn btn-azul" href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">Ver reseñas en Google</a></div>
+
+    <div class="carr-wrap">
+      <div class="carr" id="carr" tabindex="0" aria-label="Reseñas de Google">
+        <article class="rv rev" data-tags="ambiente atencion">
+          <div class="s" aria-label="5 de 5 estrellas">★★★★★</div>
+          <q><mark>Cafetería cálida</mark> con trato amoroso</q>
+          <footer><b>Naza C.</b>Reseña en Google · Local Guide</footer>
+        </article>
+        <article class="rv rev" data-tags="ambiente atencion">
+          <div class="s" aria-label="5 de 5 estrellas">★★★★★</div>
+          <q>El lugar es chico pero canchero, limpio y linda deco. La <mark>atención</mark> de las chicas un mil, la carta concisa y variada.</q>
+          <footer><b>Juanita C.</b>Reseña en Google · Local Guide</footer>
+        </article>
+        <article class="rv rev" data-tags="alfajores terraza atencion">
+          <div class="s" aria-label="5 de 5 estrellas">★★★★★</div>
+          <q>La pastelería es exquisita, recomiendo 100% los <mark>alfajores</mark> en todas las variedades, el tostado riquísimo!!</q>
+          <footer><b>Mónica P.</b>Reseña en Google · Local Guide</footer>
+        </article>
+        <article class="rv rev" data-tags="cafe ambiente atencion">
+          <div class="s" aria-label="5 de 5 estrellas">★★★★★</div>
+          <q>Fui a tomar un <mark>café</mark> porque tenía que hacer tiempo, primera vez en la zona y me encantó esa esquina. Riquísimo.</q>
+          <footer><b>Cecilia M.</b>Reseña en Google · Local Guide</footer>
+        </article>
+        <article class="rv rev" data-tags="casero terraza atencion">
+          <div class="s" aria-label="5 de 5 estrellas">★★★★★</div>
+          <q>Comida rica y saludable, como <mark>hecha en casa</mark>! También hermoso lugar para comer ahí, con un <mark>espacio afuera</mark> para almorzar con música y solcito en la cara!</q>
+          <footer><b>Silvana D.</b>Reseña en Google · Local Guide</footer>
+        </article>
+      </div>
+      <div class="flechas">
+        <button class="flecha" type="button" id="prev" aria-label="Reseña anterior">←</button>
+        <button class="flecha" type="button" id="next" aria-label="Reseña siguiente">→</button>
+      </div>
     </div>
+
+    <div class="res-cta rev"><a class="btn btn-azul" href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">Ver todas las reseñas en Google</a></div>
   </div>
 </section>
 
@@ -397,7 +505,7 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 </section>
 </main>
 
-<footer>
+<footer class="pie">
   <div class="wrap">
     <span class="pie-logo"><img src="logo.png" alt="Logo de Divina" width="63" height="54"><span class="amor">Hecho con amor</span></span>
     <span>Concordia 4723, Villa Devoto · Buenos Aires</span>
@@ -502,12 +610,47 @@ var CARTA=[
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){cerrar();burger.focus()}});
 })();
 
+/* ============ RESEÑAS: carrusel, filtro por palabra y autoplay ============ */
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var carr=document.getElementById('carr'),cards=[].slice.call(carr.children),chips=[].slice.call(document.querySelectorAll('.chip')),activo=null,pausa=false;
+  function paso(){var c=cards[0];return c.getBoundingClientRect().width+20}
+  function mover(d){
+    var fin=carr.scrollLeft+carr.clientWidth>=carr.scrollWidth-4;
+    if(d>0&&fin)carr.scrollTo({left:0,behavior:reduce?'auto':'smooth'});
+    else carr.scrollBy({left:d*paso(),behavior:reduce?'auto':'smooth'});
+  }
+  document.getElementById('prev').addEventListener('click',function(){mover(-1)});
+  document.getElementById('next').addEventListener('click',function(){mover(1)});
+  carr.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();mover(1)}if(e.key==='ArrowLeft'){e.preventDefault();mover(-1)}});
+  chips.forEach(function(ch){
+    ch.addEventListener('click',function(){
+      var t=ch.dataset.t;activo=activo===t?null:t;
+      chips.forEach(function(c){c.setAttribute('aria-pressed',c.dataset.t===activo?'true':'false')});
+      var primero=null;
+      cards.forEach(function(c){
+        var ok=!activo||c.dataset.tags.split(' ').indexOf(activo)>-1;
+        c.classList.toggle('dim',!ok);
+        if(ok&&!primero)primero=c;
+      });
+      if(activo&&primero)carr.scrollTo({left:primero.offsetLeft-carr.offsetLeft,behavior:reduce?'auto':'smooth'});
+    });
+  });
+  if(!reduce){
+    ['pointerenter','focusin','touchstart'].forEach(function(e){carr.addEventListener(e,function(){pausa=true})});
+    ['pointerleave','focusout'].forEach(function(e){carr.addEventListener(e,function(){pausa=false})});
+    setInterval(function(){if(!pausa&&!activo&&!document.hidden){
+      var r=carr.getBoundingClientRect();
+      if(r.top<innerHeight&&r.bottom>0)mover(1);
+    }},5000);
+  }
+})();
+
 /* ============ ANIMACIONES, PROGRESO, SUBIR, MENÚ ACTIVO ============ */
 (function(){
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,fino=matchMedia('(pointer:fine)').matches;
   var els=document.querySelectorAll('.rev,.rev-img');
 
-  // Contador del 4,7
   var num=document.getElementById('num');
   function cuenta(){
     if(reduce||!num)return;var t0=null,fin=parseFloat(num.dataset.to);
@@ -528,14 +671,10 @@ var CARTA=[
     Object.keys(links).forEach(function(k){var s=document.getElementById(k);if(s)so.observe(s)});
   }else{els.forEach(function(el){el.classList.add('in')})}
 
-  // Parallax suave del hero (scroll + mouse)
   var P=[].slice.call(document.querySelectorAll('[data-d]')),mx=0,my=0,sy=0,hero=document.getElementById('inicio');
   function par(){P.forEach(function(e){var d=+e.dataset.d;e.style.translate=(mx*d*14).toFixed(1)+'px '+(my*d*14-sy*d*.08).toFixed(1)+'px'})}
-  if(!reduce){
-    if(fino)hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;par()});
-  }
+  if(!reduce&&fino)hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;par()});
 
-  // Botones magnéticos (solo escritorio)
   if(fino&&!reduce){
     document.querySelectorAll('.btn').forEach(function(b){
       b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.translate=((e.clientX-r.left-r.width/2)*.18).toFixed(1)+'px '+((e.clientY-r.top-r.height/2)*.28).toFixed(1)+'px'});
@@ -543,7 +682,6 @@ var CARTA=[
     });
   }
 
-  // Progreso, header, subir
   var root=document.documentElement,bar=document.querySelector('.progreso'),head=document.querySelector('header'),sub=document.querySelector('.subir'),tick=false;
   function onScroll(){
     var y=window.pageYOffset||root.scrollTop,h=root.scrollHeight-window.innerHeight;
@@ -556,9 +694,6 @@ var CARTA=[
   window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});
   sub.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
   onScroll();
-
-  // Menú móvil: cerrar con Escape ya está arriba
-  document.addEventListener('keydown',function(){});
 })();
 </script>
 <noscript><p style="text-align:center;padding:20px">Para ver la carta, abrí el <a href="carta.pdf">PDF de la carta</a> o el de <a href="desayunos.pdf">desayunos</a>.</p></noscript>
