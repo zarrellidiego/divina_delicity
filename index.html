@@ -29,11 +29,11 @@ h1,h2,h3,.logo-txt{font-family:'Bricolage Grotesque',sans-serif;line-height:1.05
 .wrap{width:min(1120px,100% - 40px);margin-inline:auto}
 :focus-visible{outline:3px solid var(--naranja);outline-offset:3px;border-radius:6px}
 
-/* Barra de progreso arriba */
+/* Barra de progreso */
 .progreso{position:fixed;top:0;left:0;right:0;height:4px;z-index:60;transform-origin:0 50%;transform:scaleX(var(--p,0));background:linear-gradient(90deg,var(--rosa),var(--celeste),var(--lima));pointer-events:none}
 
-/* Botones */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid transparent;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer;font-size:1rem;font-family:inherit}
+/* Botones (con efecto magnético en escritorio) */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid transparent;transition:transform .25s,box-shadow .25s,background .2s;cursor:pointer;font-size:1rem;font-family:inherit}
 .btn:hover{transform:translateY(-3px);box-shadow:0 8px 0 rgba(23,34,58,.18)}
 .btn:active{transform:translateY(0);box-shadow:none}
 .btn-rosa{background:var(--rosa);color:var(--azul)}
@@ -41,6 +41,10 @@ h1,h2,h3,.logo-txt{font-family:'Bricolage Grotesque',sans-serif;line-height:1.05
 .btn-linea:hover{background:rgba(248,206,215,.12)}
 .btn-azul{background:var(--azul);color:#fff}
 .btn-borde{border-color:var(--azul);color:var(--azul);background:transparent}
+
+/* Estrellitas */
+.est{position:absolute;width:var(--s,28px);height:var(--s,28px);pointer-events:none;animation:tw 3.2s ease-in-out infinite}
+@keyframes tw{0%,100%{transform:scale(.7) rotate(0);opacity:.55}50%{transform:scale(1.15) rotate(20deg);opacity:1}}
 
 /* Header */
 header{position:sticky;top:0;z-index:50;background:var(--azul);color:#fff;transition:box-shadow .3s}
@@ -57,33 +61,57 @@ header.scrolled{box-shadow:0 6px 20px rgba(23,34,58,.25)}
 .burger{display:none;background:none;border:2px solid var(--rosa);color:var(--rosa);width:46px;height:46px;border-radius:14px;cursor:pointer;font-size:1.4rem;line-height:1}
 
 /* Hero */
-.hero{background:var(--azul);color:#fff;position:relative;overflow:hidden;padding:56px 0 90px}
-.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero{background:var(--azul);color:#fff;position:relative;overflow:hidden;padding:56px 0 120px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;position:relative}
 .pill{display:inline-block;background:rgba(248,206,215,.16);color:var(--rosa);padding:6px 16px;border-radius:999px;font-weight:700;font-size:.9rem;margin-bottom:20px}
 .hero h1{font-size:clamp(2.5rem,6vw,4.6rem);font-weight:800;margin-bottom:20px}
 .hero h1 em{font-style:normal;color:var(--rosa)}
+.w{display:inline-block;animation:sube .8s calc(.12s*var(--i) + .1s) both}
 .hero p{font-size:1.15rem;max-width:30em;margin-bottom:30px;color:#E8EDFB}
 .acciones{display:flex;flex-wrap:wrap;gap:14px}
 .hero-foto{position:relative;aspect-ratio:1/.9}
-.blob-rosa{position:absolute;inset:8% -6% -8% 8%;background:var(--rosa);border-radius:58% 42% 55% 45%/48% 58% 42% 52%}
-.hero-foto .ph{position:absolute;inset:0;border-radius:40% 60% 45% 55%/50% 40% 60% 50%;transform:rotate(-2deg)}
+.blob-rosa{position:absolute;inset:8% -6% -8% 8%;background:var(--rosa);border-radius:58% 42% 55% 45%/48% 58% 42% 52%;animation:entra .9s .15s both,morph 9s ease-in-out 1s infinite alternate}
+@keyframes morph{to{border-radius:42% 58% 45% 55%/58% 42% 58% 42%}}
+.hero-foto .ph{position:absolute;inset:0;border-radius:40% 60% 45% 55%/50% 40% 60% 50%;transform:rotate(-2deg);animation:entra .9s .35s both}
 .hero-foto .ph img{object-position:45% 50%}
 .blob-lima{position:absolute;width:90px;height:90px;background:var(--lima);border-radius:50% 50% 45% 55%;left:-14px;bottom:8%}
 .blob-cel{position:absolute;width:150px;height:150px;background:var(--celeste);border-radius:60% 40% 55% 45%;right:-40px;top:-50px;opacity:.5}
+.ola{position:absolute;left:0;width:100%;height:60px;display:block}
+.ola.b{bottom:-1px}
+.ola.t{top:-1px;transform:rotate(180deg)}
 
-/* Fotos con fondo de respaldo si falta la imagen */
+/* Cinta en movimiento */
+.cinta{background:var(--azul);color:var(--rosa);transform:rotate(-1.2deg);width:104%;margin:-34px 0 0 -2%;position:relative;z-index:3;overflow:hidden;padding:14px 0;border-block:3px solid var(--rosa);font:800 1.15rem 'Bricolage Grotesque',sans-serif;white-space:nowrap}
+.cinta-in{display:inline-flex;animation:marq 30s linear infinite}
+.cinta span{padding-right:.6em}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* Fotos */
 .ph{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--celeste),var(--rosa))}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
-@media(hover:hover){.ph:hover img{transform:scale(1.06)}}
+@media(hover:hover){.ph:hover img{transform:scale(1.07)}}
 
 /* Secciones */
-section{padding:84px 0}
+section{padding:84px 0;position:relative}
 .tag{display:inline-block;color:var(--azul);font-weight:700;margin-bottom:10px;letter-spacing:.04em;text-transform:uppercase;font-size:.85rem}
 h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;margin-bottom:14px;color:var(--azul)}
+h2::after{content:"";display:block;width:80px;height:7px;margin-top:12px;border-radius:9px;background:var(--rosa)}
 .lead{max-width:36em;font-size:1.08rem;margin-bottom:30px}
 
 /* Carta */
-.tabs{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 12px;margin-bottom:18px;scrollbar-width:none}
+.picks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:38px}
+.pick{position:relative;overflow:hidden;text-align:left;border:0;border-radius:26px;padding:22px;min-height:190px;cursor:pointer;font-family:inherit;color:var(--tinta);display:flex;flex-direction:column;justify-content:flex-end;transition:transform .3s,box-shadow .3s}
+.pick:nth-child(1){background:var(--azul);color:#fff}
+.pick:nth-child(2){background:var(--rosa)}
+.pick:nth-child(3){background:var(--celeste)}
+.pick:nth-child(4){background:var(--lima)}
+.pick small{font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.75rem;opacity:.8}
+.pick h3{font-size:1.5rem;margin:4px 0}
+.pick p{font-size:.92rem}
+.pick::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;background:rgba(255,255,255,.28);border-radius:55% 45% 60% 40%;transition:transform .5s}
+.pick:hover{transform:translateY(-8px) rotate(-1.5deg);box-shadow:0 16px 30px rgba(36,68,154,.2)}
+.pick:hover::after{transform:scale(1.4) rotate(30deg)}
+.tabs{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 12px;margin-bottom:18px;scrollbar-width:none;scroll-margin-top:90px}
 .tabs::-webkit-scrollbar{display:none}
 .tab{flex:0 0 auto;border:2px solid var(--azul);background:transparent;color:var(--azul);padding:10px 22px;border-radius:999px;font:700 1rem 'DM Sans',sans-serif;cursor:pointer;transition:background .2s,color .2s,transform .2s}
 .tab:hover{transform:translateY(-2px)}
@@ -95,32 +123,50 @@ h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;margin-bottom:14px;color:v
 .grupo h3{font-size:1.5rem;color:var(--azul);margin-bottom:4px}
 .grupo .nota{font-size:.95rem;color:#5b6784;margin-bottom:10px}
 .items{list-style:none;columns:2;column-gap:36px}
-.items li{break-inside:avoid;padding:11px 0;border-bottom:1px dashed rgba(36,68,154,.25);display:flex;justify-content:space-between;gap:14px}
+.items li{break-inside:avoid;padding:11px 0;border-bottom:1px dashed rgba(36,68,154,.25);display:flex;justify-content:space-between;gap:14px;animation:item .45s calc(var(--n)*35ms) both;transition:transform .25s}
+.items li:hover{transform:translateX(6px)}
+@keyframes item{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
 .items b{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:1.08rem}
 .items span{font-size:.95rem;color:#4a5573}
 .items i{font-style:normal;font-weight:700;color:var(--azul);white-space:nowrap}
 .carta-cta{margin-top:26px;display:flex;flex-wrap:wrap;gap:14px}
 
 /* Merienda */
-.merienda{background:var(--rosa);position:relative;overflow:hidden}
+.merienda{background:var(--rosa);overflow:hidden}
+.merienda h2::after{background:var(--azul)}
 .merienda .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:44px;align-items:center}
 .merienda .ph{aspect-ratio:1/1;border-radius:36px 120px 36px 36px;box-shadow:0 14px 0 var(--azul)}
 .merienda p{max-width:30em;margin-bottom:24px}
 
 /* El lugar */
-.lugar{background:#fff;position:relative}
-.lugar-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:34px}
-.google{display:inline-flex;align-items:center;gap:8px;background:var(--crema);padding:10px 20px;border-radius:999px;text-decoration:none;font-weight:700;transition:transform .2s}
-.google:hover{transform:translateY(-3px)}
-.google b{color:var(--naranja)}
-.galeria{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:240px 240px;gap:16px}
+.lugar{background:#fff}
+.galeria{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:240px 240px;gap:16px;margin-top:30px}
 .galeria .ph{border-radius:28px}
 .galeria .ph:first-child{grid-row:span 2;border-radius:28px 120px 28px 28px}
 .galeria .ph:first-child img{object-position:50% 25%}
 .galeria .ph:last-child{border-radius:28px 28px 28px 90px}
 
+/* Reseñas */
+.resenas .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:center}
+.nota-g{text-align:center}
+.num-g{font:800 clamp(5.5rem,14vw,9rem)/.9 'Bricolage Grotesque',sans-serif;color:var(--azul)}
+.estr{color:var(--naranja);font-size:2rem;letter-spacing:.1em}
+.nota-g div:last-child{font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:12px;margin:6px 0 22px}
+.chips span{background:#fff;border:2px solid var(--azul);color:var(--azul);font-weight:700;padding:9px 18px;border-radius:999px;animation:flota 4s ease-in-out infinite alternate}
+.chips span:nth-child(2){animation-delay:.6s;background:var(--rosa)}
+.chips span:nth-child(3){animation-delay:1.2s;background:var(--lima)}
+.chips span:nth-child(4){animation-delay:1.8s;background:var(--celeste)}
+@keyframes flota{to{transform:translateY(-8px)}}
+
+/* Seguinos */
+.seguinos{background:var(--celeste);text-align:center;overflow:hidden}
+.seguinos h2::after{margin-inline:auto;background:var(--azul)}
+.seguinos p{max-width:32em;margin:0 auto 24px}
+.seguinos .acciones{justify-content:center}
+
 /* Ubicación */
-.ubi{background:var(--azul);color:#fff;position:relative;overflow:hidden}
+.ubi{background:var(--azul);color:#fff;overflow:hidden;padding-top:110px}
 .ubi .wrap{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
 .ubi h2{color:#fff}
 .dir{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(1.6rem,3.6vw,2.4rem);font-weight:700;color:var(--rosa);margin-bottom:8px}
@@ -140,27 +186,27 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 .copy{opacity:.7;font-size:.85rem}
 .creditos a svg{vertical-align:-1px;margin-left:3px}
 
-/* Botones flotantes: llamar y subir */
+/* Flotantes: llamar, subir y barra del celular */
 .llamar{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:inline-flex;align-items:center;gap:8px;background:var(--rosa);color:var(--azul);font-weight:700;text-decoration:none;padding:13px 20px;border-radius:999px;border:2px solid var(--azul);box-shadow:0 6px 18px rgba(0,0,0,.28);transition:transform .2s}
 .llamar:hover{transform:translateY(-3px)}
 .subir{position:fixed;right:16px;bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:39;width:48px;height:48px;border-radius:50%;border:2px solid var(--crema);background:var(--azul);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.25);opacity:0;transform:translateY(16px) scale(.8);pointer-events:none;transition:opacity .3s,transform .3s,background .2s;-webkit-tap-highlight-color:transparent}
 .subir.ver{opacity:1;transform:none;pointer-events:auto}
 .subir:hover{background:var(--tinta)}
-.subir:active{transform:scale(.9)}
+.barra{display:none}
 
-/* Animaciones (solo si hay JS; sin JS todo se ve) */
+/* Animaciones de entrada */
 @keyframes sube{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-@keyframes entra{from{opacity:0;transform:scale(.88) rotate(4deg)}to{opacity:1;transform:none}}
+@keyframes entra{from{opacity:0;transform:scale(.88) rotate(4deg)}to{opacity:1}}
 .hero .pill{animation:sube .7s both}
-.hero h1{animation:sube .7s .12s both}
-.hero p{animation:sube .7s .24s both}
-.hero .acciones{animation:sube .7s .36s both}
-.hero-foto .blob-rosa{animation:entra .9s .15s both}
-.hero-foto .ph{animation:entra .9s .35s both}
+.hero p{animation:sube .7s .55s both}
+.hero .acciones{animation:sube .7s .7s both}
 .js .rev{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
 .js .rev.in{opacity:1;transform:none}
-.js .rev-img{opacity:0;transform:scale(.94);transition:opacity .9s,transform .9s}
-.js .rev-img.in{opacity:1;transform:none}
+.js h2.rev::after{transform:scaleX(0);transform-origin:left;transition:transform .8s .35s}
+.js h2.rev.in::after{transform:none}
+.js .seguinos h2.rev::after{transform-origin:center}
+.js .rev-img{opacity:0;clip-path:inset(15% 15% 15% 15%);transform:scale(.94);transition:opacity .9s,transform .9s,clip-path 1s}
+.js .rev-img.in{opacity:1;clip-path:inset(-30px);transform:none}
 
 /* Celular */
 @media(max-width:860px){
@@ -169,10 +215,13 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   .menu.open{display:flex}
   .menu li{padding:12px 0}
   .menu .btn{width:100%}
-  .hero{padding:36px 0 70px}
-  .hero .wrap,.merienda .wrap,.ubi .wrap{grid-template-columns:1fr;gap:30px}
+  .hero{padding:36px 0 100px}
+  .hero .wrap,.merienda .wrap,.ubi .wrap,.resenas .wrap{grid-template-columns:1fr;gap:30px}
   .hero-foto{margin:10px auto 0;width:94%}
   .acciones .btn{flex:1 1 150px}
+  .picks{grid-template-columns:1fr 1fr;gap:12px}
+  .pick{min-height:160px;padding:16px}
+  .pick h3{font-size:1.2rem}
   .items{columns:1}
   .panel{padding:20px}
   section{padding:64px 0}
@@ -180,15 +229,21 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   .galeria{grid-template-rows:300px 150px}
   .galeria .ph:first-child{grid-row:span 2}
   .progreso{display:none}
+  .llamar{display:none}
+  .barra{position:fixed;left:0;right:0;bottom:0;z-index:45;display:flex;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:var(--azul);box-shadow:0 -6px 20px rgba(23,34,58,.25)}
+  .barra .btn{flex:1;padding:12px 10px}
+  .subir{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  body{padding-bottom:70px}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-  .js .rev,.js .rev-img{opacity:1;transform:none}
+  .js .rev,.js .rev-img{opacity:1;transform:none;clip-path:none}
   .progreso{display:none}
 }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="est" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z"/></symbol></svg>
 <div class="progreso" aria-hidden="true"></div>
 
 <header>
@@ -210,10 +265,13 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 <main>
 <!-- INICIO -->
 <div class="hero" id="inicio">
+  <svg class="est" viewBox="0 0 24 24" style="top:14%;left:3%;--s:30px;color:var(--lima)" data-d="2" aria-hidden="true"><use href="#est"/></svg>
+  <svg class="est" viewBox="0 0 24 24" style="top:62%;left:46%;--s:22px;color:var(--rosa);animation-delay:1s" data-d="1.5" aria-hidden="true"><use href="#est"/></svg>
+  <svg class="est" viewBox="0 0 24 24" style="top:10%;right:6%;--s:36px;color:var(--celeste);animation-delay:.5s" data-d="2.5" aria-hidden="true"><use href="#est"/></svg>
   <div class="wrap">
     <div>
       <span class="pill">Villa Devoto, Buenos Aires</span>
-      <h1>Café de especialidad, <em>hecho con amor</em></h1>
+      <h1><span class="w" style="--i:0">Café</span> <span class="w" style="--i:1">de</span> <span class="w" style="--i:2">especialidad,</span> <em><span class="w" style="--i:3">hecho</span> <span class="w" style="--i:4">con</span> <span class="w" style="--i:5">amor</span></em></h1>
       <p>Pasá por Divina a tomar un café, almorzar o merendar algo rico.</p>
       <div class="acciones">
         <a class="btn btn-rosa" href="#carta">Ver carta</a>
@@ -221,20 +279,34 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
       </div>
     </div>
     <div class="hero-foto">
-      <div class="blob-cel"></div>
+      <div class="blob-cel" data-d="1.4"></div>
       <div class="blob-rosa"></div>
       <div class="ph"><img src="hero.jpg" alt="La esquina azul de Divina en Villa Devoto, con mesas en la vereda" width="1440" height="810" onerror="this.remove()"></div>
-      <div class="blob-lima"></div>
+      <div class="blob-lima" data-d="2.2"></div>
     </div>
   </div>
+  <svg class="ola b" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path fill="#FFF6E9" d="M0 30C240 70 480 0 720 30s480 40 720 0v30H0z"/></svg>
 </div>
+
+<div class="cinta" aria-hidden="true"><div class="cinta-in">
+  <span>Hecho con amor ✦ Café de especialidad ✦ Villa Devoto ✦ Dulce y salado ✦ Recién horneado ✦</span>
+  <span>Hecho con amor ✦ Café de especialidad ✦ Villa Devoto ✦ Dulce y salado ✦ Recién horneado ✦</span>
+  <span>Hecho con amor ✦ Café de especialidad ✦ Villa Devoto ✦ Dulce y salado ✦ Recién horneado ✦</span>
+  <span>Hecho con amor ✦ Café de especialidad ✦ Villa Devoto ✦ Dulce y salado ✦ Recién horneado ✦</span>
+</div></div>
 
 <!-- CARTA -->
 <section id="carta">
   <div class="wrap">
     <span class="tag rev">Carta</span>
     <h2 class="rev">Dulce, salado y café del bueno</h2>
-    <p class="lead rev">Elegí una categoría y mirá qué hay para tomar y comer en Divina.</p>
+    <p class="lead rev">Para ir empezando, elegí una opción. Abajo tenés toda la carta por categoría.</p>
+    <div class="picks">
+      <button class="pick rev" type="button" data-go="cafe"><small>Café</small><h3>Flat white</h3><p>60ml de café + leche espumada</p></button>
+      <button class="pick rev" type="button" data-go="dulce"><small>Dulce</small><h3>Alfajores</h3><p>Victoria, Santino, Felipe, Luchi y más</p></button>
+      <button class="pick rev" type="button" data-go="salado"><small>Salado</small><h3>Croissant mediterráneo</h3><p>Jamón crudo, rúcula &amp; queso</p></button>
+      <button class="pick rev" type="button" data-go="cafe"><small>Bebida fría</small><h3>Coffee tonic</h3><p>30ml de café + agua tónica + hielo</p></button>
+    </div>
     <div class="tabs" role="tablist" aria-label="Categorías de la carta" id="tabs"></div>
     <div class="panel" id="panel" role="tabpanel" tabindex="0"></div>
     <div class="carta-cta">
@@ -246,6 +318,8 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 
 <!-- MERIENDA -->
 <section class="merienda">
+  <svg class="est" viewBox="0 0 24 24" style="top:12%;right:7%;--s:34px;color:var(--azul)" aria-hidden="true"><use href="#est"/></svg>
+  <svg class="est" viewBox="0 0 24 24" style="bottom:10%;left:4%;--s:26px;color:var(--naranja);animation-delay:1s" aria-hidden="true"><use href="#est"/></svg>
   <div class="wrap">
     <div class="ph rev-img"><img src="merienda.jpg" alt="Café con leche con latte art en taza blanca sobre plato de madera, con el texto Merendá en Divina" loading="lazy" width="1080" height="1080" onerror="this.remove()"></div>
     <div>
@@ -260,14 +334,9 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 <!-- EL LUGAR -->
 <section class="lugar" id="lugar">
   <div class="wrap">
-    <div class="lugar-top">
-      <div>
-        <span class="tag rev">El lugar</span>
-        <h2 class="rev" style="margin-bottom:8px">Una esquina de Devoto para hacer una pausa</h2>
-        <p class="rev">Desayuno, almuerzo o merienda, en el lugar o para llevar.</p>
-      </div>
-      <a class="google rev" href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">⭐ <b>4,7</b> en Google · ver reseñas</a>
-    </div>
+    <span class="tag rev">El lugar</span>
+    <h2 class="rev" style="margin-bottom:8px">Una esquina de Devoto para hacer una pausa</h2>
+    <p class="rev">Desayuno, almuerzo o merienda, en el lugar o para llevar.</p>
     <div class="galeria">
       <div class="ph rev-img"><img src="lugar-1.jpg" alt="Dos personas sonriendo en la vereda de Divina, junto a unos barriles y una sombrilla" loading="lazy" onerror="this.remove()"></div>
       <div class="ph rev-img"><img src="lugar-2.jpg" alt="Interior de Divina" loading="lazy" onerror="this.remove()"></div>
@@ -276,8 +345,41 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   </div>
 </section>
 
+<!-- RESEÑAS -->
+<section class="resenas">
+  <div class="wrap">
+    <div class="nota-g rev">
+      <div class="num-g"><span id="num" data-to="4.7">4,7</span></div>
+      <div class="estr" role="img" aria-label="4,7 de 5 estrellas">★★★★★</div>
+      <div>en Google</div>
+    </div>
+    <div>
+      <span class="tag rev">Reseñas</span>
+      <h2 class="rev">Lo que más se repite</h2>
+      <div class="chips rev"><span>El café</span><span>Dulce y salado</span><span>Recién horneado</span><span>Atención amable</span></div>
+      <div class="rev"><a class="btn btn-azul" href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">Ver reseñas en Google</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGUINOS -->
+<section class="seguinos">
+  <svg class="est" viewBox="0 0 24 24" style="top:16%;left:8%;--s:32px;color:var(--lima)" aria-hidden="true"><use href="#est"/></svg>
+  <svg class="est" viewBox="0 0 24 24" style="bottom:14%;right:9%;--s:38px;color:var(--rosa);animation-delay:.8s" aria-hidden="true"><use href="#est"/></svg>
+  <div class="wrap">
+    <span class="tag rev">Redes</span>
+    <h2 class="rev">Seguinos en Instagram</h2>
+    <p class="rev">Novedades y cosas ricas de Divina en @divina_delicity.</p>
+    <div class="acciones rev">
+      <a class="btn btn-azul" href="https://www.instagram.com/divina_delicity/" target="_blank" rel="noopener">@divina_delicity</a>
+      <a class="btn btn-borde" href="https://linktr.ee/divina_delicity" target="_blank" rel="noopener">Linktree oficial</a>
+    </div>
+  </div>
+</section>
+
 <!-- UBICACIÓN -->
 <section class="ubi" id="ubicacion">
+  <svg class="ola t" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path fill="#8CB8DB" d="M0 30C240 70 480 0 720 30s480 40 720 0v30H0z"/></svg>
   <div class="blob"></div>
   <div class="wrap">
     <div>
@@ -309,6 +411,10 @@ footer .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   </div>
 </footer>
 
+<div class="barra">
+  <a class="btn btn-rosa" href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar</a>
+  <a class="btn btn-linea" href="tel:+5491136189773">Llamar</a>
+</div>
 <a class="llamar" href="tel:+5491136189773" aria-label="Llamar a Divina"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.6 3.6a1 1 0 0 1-.25 1z"/></svg>Llamar</a>
 <button class="subir" type="button" aria-label="Volver arriba"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 
@@ -340,18 +446,19 @@ var CARTA=[
 ];
 
 (function(){
-  var tabs=document.getElementById('tabs'),panel=document.getElementById('panel'),btns=[];
+  var tabs=document.getElementById('tabs'),panel=document.getElementById('panel'),btns=[],reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   function pinta(k){
-    var c=CARTA[k];panel.innerHTML='';
+    var c=CARTA[k],n=0;panel.innerHTML='';
     btns.forEach(function(b,j){b.setAttribute('aria-selected',j===k?'true':'false');b.tabIndex=j===k?0:-1});
     panel.setAttribute('aria-labelledby','tab-'+c.id);
     c.g.forEach(function(g){
       var d=document.createElement('div');d.className='grupo';
       var h=document.createElement('h3');h.textContent=g.t;d.appendChild(h);
-      if(g.n){var n=document.createElement('p');n.className='nota';n.textContent=g.n;d.appendChild(n)}
+      if(g.n){var no=document.createElement('p');no.className='nota';no.textContent=g.n;d.appendChild(no)}
       var ul=document.createElement('ul');ul.className='items';
       g.i.forEach(function(it){
         var li=document.createElement('li'),t=document.createElement('div');
+        li.style.setProperty('--n',Math.min(n++,14));
         var b=document.createElement('b');b.textContent=it[0];t.appendChild(b);
         if(it[1]){var s=document.createElement('span');s.textContent=it[1];t.appendChild(s)}
         li.appendChild(t);
@@ -364,7 +471,7 @@ var CARTA=[
   }
   CARTA.forEach(function(c,k){
     var b=document.createElement('button');b.type='button';b.className='tab';b.id='tab-'+c.id;b.textContent=c.t;
-    b.setAttribute('role','tab');b.dataset.id=c.id;
+    b.setAttribute('role','tab');
     b.addEventListener('click',function(){pinta(k)});
     b.addEventListener('keydown',function(e){
       var n=e.key==='ArrowRight'?k+1:e.key==='ArrowLeft'?k-1:-1;
@@ -377,7 +484,7 @@ var CARTA=[
     b.addEventListener('click',function(){
       var k=CARTA.findIndex(function(c){return c.id===b.dataset.go});
       if(k>-1)pinta(k);
-      document.getElementById('carta').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});
+      tabs.scrollIntoView({behavior:reduce?'auto':'smooth'});
     });
   });
 })();
@@ -395,12 +502,21 @@ var CARTA=[
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){cerrar();burger.focus()}});
 })();
 
-/* ============ APARICIONES, PROGRESO, SUBIR Y MENÚ ACTIVO ============ */
+/* ============ ANIMACIONES, PROGRESO, SUBIR, MENÚ ACTIVO ============ */
 (function(){
-  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches,fino=matchMedia('(pointer:fine)').matches;
   var els=document.querySelectorAll('.rev,.rev-img');
+
+  // Contador del 4,7
+  var num=document.getElementById('num');
+  function cuenta(){
+    if(reduce||!num)return;var t0=null,fin=parseFloat(num.dataset.to);
+    function paso(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/1400),v=fin*(1-Math.pow(1-k,3));num.textContent=v.toFixed(1).replace('.',',');if(k<1)requestAnimationFrame(paso)}
+    requestAnimationFrame(paso);
+  }
+
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+    var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');if(x.target.querySelector&&x.target.querySelector('#num'))cuenta();io.unobserve(x.target)}})},{threshold:.12});
     els.forEach(function(el){io.observe(el)});
     var links={};
     document.querySelectorAll('.menu a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
@@ -412,17 +528,37 @@ var CARTA=[
     Object.keys(links).forEach(function(k){var s=document.getElementById(k);if(s)so.observe(s)});
   }else{els.forEach(function(el){el.classList.add('in')})}
 
+  // Parallax suave del hero (scroll + mouse)
+  var P=[].slice.call(document.querySelectorAll('[data-d]')),mx=0,my=0,sy=0,hero=document.getElementById('inicio');
+  function par(){P.forEach(function(e){var d=+e.dataset.d;e.style.translate=(mx*d*14).toFixed(1)+'px '+(my*d*14-sy*d*.08).toFixed(1)+'px'})}
+  if(!reduce){
+    if(fino)hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;par()});
+  }
+
+  // Botones magnéticos (solo escritorio)
+  if(fino&&!reduce){
+    document.querySelectorAll('.btn').forEach(function(b){
+      b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.translate=((e.clientX-r.left-r.width/2)*.18).toFixed(1)+'px '+((e.clientY-r.top-r.height/2)*.28).toFixed(1)+'px'});
+      b.addEventListener('pointerleave',function(){b.style.translate=''});
+    });
+  }
+
+  // Progreso, header, subir
   var root=document.documentElement,bar=document.querySelector('.progreso'),head=document.querySelector('header'),sub=document.querySelector('.subir'),tick=false;
   function onScroll(){
     var y=window.pageYOffset||root.scrollTop,h=root.scrollHeight-window.innerHeight;
     bar.style.setProperty('--p',h>0?Math.min(1,y/h).toFixed(4):0);
     head.classList.toggle('scrolled',y>10);
     sub.classList.toggle('ver',y>500);
+    if(!reduce){sy=Math.min(y,900);par()}
     tick=false;
   }
   window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(onScroll)}},{passive:true});
   sub.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
   onScroll();
+
+  // Menú móvil: cerrar con Escape ya está arriba
+  document.addEventListener('keydown',function(){});
 })();
 </script>
 <noscript><p style="text-align:center;padding:20px">Para ver la carta, abrí el <a href="carta.pdf">PDF de la carta</a> o el de <a href="desayunos.pdf">desayunos</a>.</p></noscript>
