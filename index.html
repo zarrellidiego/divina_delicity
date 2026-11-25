@@ -141,6 +141,19 @@ h2::after{content:"";display:block;width:80px;height:7px;margin-top:12px;border-
 .merienda .ph{aspect-ratio:1/1;border-radius:36px 120px 36px 36px;box-shadow:0 14px 0 var(--azul)}
 .merienda p{max-width:30em;margin-bottom:24px}
 
+/* Hecho con amor */
+.amor{background:var(--crema);overflow:hidden}
+.amor .wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative}
+.duo{position:relative;width:100%;max-width:470px;margin-inline:auto;padding-bottom:64px}
+.duo .blob-r{position:absolute;inset:-7% 12% 6% -9%;background:var(--rosa);border-radius:58% 42% 55% 45%/48% 58% 42% 52%;animation:morph 9s ease-in-out infinite alternate}
+.duo .f1{position:relative;z-index:1;aspect-ratio:4/5;border-radius:36px 36px 36px 130px;box-shadow:0 14px 0 var(--azul)}
+.duo .f1 img{object-position:50% 36%}
+.duo .f2{position:absolute;z-index:2;right:-9%;bottom:0;width:60%;aspect-ratio:1.45/1;border-radius:26px;border:6px solid #fff;box-shadow:0 16px 30px rgba(23,34,58,.28);rotate:4deg;transition:rotate .4s,scale .4s}
+@media(hover:hover){.duo .f2:hover{rotate:0deg;scale:1.05}}
+.duo .f2 img{object-position:70% 30%}
+.script{display:block;font-family:'Caveat',cursive;font-size:clamp(2.8rem,6.5vw,4.4rem);line-height:1;color:var(--naranja);margin-bottom:8px}
+.amor p{max-width:30em;margin-bottom:24px}
+
 /* El lugar */
 .lugar{background:#fff}
 .galeria{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:240px 240px;gap:16px;margin-top:30px}
@@ -224,7 +237,7 @@ footer.pie{background:var(--tinta);color:#fff;padding:40px 0;text-align:center;f
 footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 .pie-logo{display:inline-flex;align-items:center;gap:12px}
 .pie-logo img{width:63px;height:54px;border-radius:12px;object-fit:contain}
-.amor{font-family:'Caveat',cursive;font-size:2rem;color:var(--rosa);line-height:1}
+.amor-pie{font-family:'Caveat',cursive;font-size:2rem;color:var(--rosa);line-height:1}
 .redes{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;align-items:center}
 .redes a,.creditos a{font-weight:700}
 .redes a.ig{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:50%;border:2px solid var(--rosa);color:var(--rosa);text-decoration:none;transition:background .25s,color .25s,transform .25s}
@@ -237,7 +250,7 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 .llamar:hover{transform:translateY(-3px)}
 .barra{display:none}
 
-/* Flecha de subir con efectos */
+/* Flecha de subir */
 .subir{position:fixed;right:18px;bottom:calc(82px + env(safe-area-inset-bottom,0px));z-index:39;width:52px;height:52px;border-radius:50%;border:0;background:var(--azul);color:#fff;display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.3);opacity:0;transform:translateY(20px) scale(.7);pointer-events:none;transition:opacity .35s,transform .35s cubic-bezier(.3,1.6,.5,1),background .25s,color .25s;-webkit-tap-highlight-color:transparent}
 .subir.ver{opacity:1;transform:none;pointer-events:auto}
 .subir.ver:hover{transform:translateY(-5px) scale(1.1);background:var(--rosa);color:var(--azul)}
@@ -277,7 +290,10 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   .menu li{padding:12px 0}
   .menu .btn{width:100%}
   .hero{padding:36px 0 100px}
-  .hero .wrap,.merienda .wrap,.ubi .wrap,.res-top,.eventos .wrap{grid-template-columns:1fr;gap:30px}
+  .hero .wrap,.merienda .wrap,.ubi .wrap,.res-top,.eventos .wrap,.amor .wrap{grid-template-columns:1fr;gap:30px}
+  .amor .wrap{gap:44px}
+  .duo{max-width:400px;width:88%}
+  .duo .f2{right:-8%}
   .hero-foto{margin:10px auto 0;width:94%}
   .acciones .btn{flex:1 1 150px}
   .seguinos .btn-ig{flex:0 0 auto}
@@ -395,6 +411,28 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
       <h2 class="rev">Merendá en Divina</h2>
       <p class="rev">Un flat white o un té con algo rico para acompañar. Mirá los desayunos y combos que tenemos.</p>
       <div class="rev"><button class="btn btn-azul" type="button" data-go="desayunos">Ver desayunos</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- HECHO CON AMOR -->
+<section class="amor" id="amor">
+  <svg class="est" viewBox="0 0 24 24" style="top:10%;right:8%;--s:34px;color:var(--naranja)" aria-hidden="true"><use href="#est"/></svg>
+  <svg class="est" viewBox="0 0 24 24" style="bottom:12%;left:6%;--s:28px;color:var(--azul);animation-delay:1.1s" aria-hidden="true"><use href="#est"/></svg>
+  <div class="wrap">
+    <div class="duo">
+      <div class="blob-r"></div>
+      <div class="ph f1 rev-img"><img src="interior.jpg" alt="Dos personas abrazadas y sonriendo dentro de Divina, con una taza celeste y una pared rosa con mural de fondo" loading="lazy" width="640" height="1136" onerror="this.remove()"></div>
+      <div class="ph f2 rev-img"><img src="barista.jpg" alt="Ilustración de una barista sonriendo junto a una máquina de café" loading="lazy" width="1439" height="902" onerror="this.remove()"></div>
+    </div>
+    <div>
+      <span class="script rev">Hecho con amor</span>
+      <h2 class="rev">Un rincón de Devoto para quedarte</h2>
+      <p class="rev">Café de especialidad, algo dulce o algo salado y un lugar cálido para hacer una pausa. Pasá a conocernos.</p>
+      <div class="acciones rev">
+        <a class="btn btn-azul" href="#carta">Ver carta</a>
+        <a class="btn btn-borde" href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar</a>
+      </div>
     </div>
   </div>
 </section>
@@ -530,7 +568,7 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 
 <footer class="pie">
   <div class="wrap">
-    <span class="pie-logo"><img src="logo.png" alt="Logo de Divina" width="63" height="54"><span class="amor">Hecho con amor</span></span>
+    <span class="pie-logo"><img src="logo.png" alt="Logo de Divina" width="63" height="54"><span class="amor-pie">Hecho con amor</span></span>
     <span>Concordia 4723, Villa Devoto · Buenos Aires</span>
     <div class="redes">
       <a class="ig" href="https://www.instagram.com/divina_delicity/" target="_blank" rel="noopener" aria-label="Instagram de Divina"><svg width="24" height="24" aria-hidden="true"><use href="#ig"/></svg></a>
