@@ -132,7 +132,7 @@ h2::after{content:"";display:block;width:80px;height:7px;margin-top:12px;border-
 .items b{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:1.08rem}
 .items span{font-size:.95rem;color:#4a5573}
 .items i{font-style:normal;font-weight:700;color:var(--azul);white-space:nowrap}
-.carta-cta{margin-top:26px;display:flex;flex-wrap:wrap;gap:14px}
+.carta-cta{margin-top:26px;display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
 
 /* Merienda */
 .merienda{background:var(--rosa);overflow:hidden}
@@ -156,11 +156,14 @@ h2::after{content:"";display:block;width:80px;height:7px;margin-top:12px;border-
 
 /* El lugar */
 .lugar{background:#fff}
-.galeria{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:240px 240px;gap:16px;margin-top:30px}
+.galeria{display:grid;grid-template-columns:1fr 1fr .8fr;grid-template-rows:260px 260px;gap:16px;margin-top:30px}
 .galeria .ph{border-radius:28px}
-.galeria .ph:first-child{grid-row:span 2;border-radius:28px 120px 28px 28px}
-.galeria .ph:first-child img{object-position:50% 25%}
-.galeria .ph:last-child{border-radius:28px 28px 28px 90px}
+.galeria .g1{grid-column:1/3;grid-row:1}
+.galeria .g2{grid-column:1/3;grid-row:2;border-radius:28px 28px 28px 90px}
+.galeria .g3{grid-column:3;grid-row:1/3;border-radius:28px 120px 28px 28px}
+.galeria .g1 img{object-position:50% 66%}
+.galeria .g2 img{object-position:50% 33%}
+.galeria .g3 img{object-position:50% 25%}
 
 /* Eventos */
 .eventos{background:var(--lima);overflow:hidden}
@@ -245,9 +248,14 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
 .copy{opacity:.7;font-size:.85rem}
 .creditos a svg{vertical-align:-1px;margin-left:3px}
 
-/* Flotantes */
-.llamar{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;display:inline-flex;align-items:center;gap:8px;background:var(--rosa);color:var(--azul);font-weight:700;text-decoration:none;padding:13px 20px;border-radius:999px;border:2px solid var(--azul);box-shadow:0 6px 18px rgba(0,0,0,.28);transition:transform .2s}
-.llamar:hover{transform:translateY(-3px)}
+/* Botón de llamar (solo escritorio): círculo con ícono que se expande al pasar el mouse */
+.llamar{position:fixed;right:18px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;height:52px;width:52px;border-radius:999px;background:var(--rosa);color:var(--azul);text-decoration:none;display:flex;align-items:center;overflow:hidden;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.28);transition:width .4s cubic-bezier(.3,1.3,.5,1),background .25s,color .25s}
+.llamar .ico{flex:0 0 52px;height:52px;display:grid;place-items:center}
+.llamar .ico svg{animation:timbre 4.5s ease-in-out infinite;transform-origin:50% 50%}
+.llamar .txt{font-weight:700;padding-right:20px;opacity:0;transition:opacity .25s}
+.llamar:hover,.llamar:focus-visible{width:128px;background:var(--azul);color:#fff}
+.llamar:hover .txt,.llamar:focus-visible .txt{opacity:1;transition-delay:.12s}
+@keyframes timbre{0%,70%,100%{transform:rotate(0)}74%{transform:rotate(-16deg)}78%{transform:rotate(14deg)}82%{transform:rotate(-12deg)}86%{transform:rotate(10deg)}90%{transform:rotate(0)}}
 .barra{display:none}
 
 /* Flecha de subir */
@@ -296,6 +304,7 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   .duo .f2{right:-8%}
   .hero-foto{margin:10px auto 0;width:94%}
   .acciones .btn{flex:1 1 150px}
+  .carta-cta .btn{flex:0 1 auto}
   .seguinos .btn-ig{flex:0 0 auto}
   .picks{grid-template-columns:1fr 1fr;gap:12px}
   .pick{min-height:160px;padding:16px}
@@ -304,8 +313,10 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   .panel{padding:20px}
   section{padding:64px 0}
   .merienda .ph{max-width:420px;margin:0 auto;width:100%}
-  .galeria{grid-template-rows:300px 150px}
-  .galeria .ph:first-child{grid-row:span 2}
+  .galeria{grid-template-columns:1fr;grid-template-rows:200px 200px 340px}
+  .galeria .g1,.galeria .g2,.galeria .g3{grid-column:1;grid-row:auto}
+  .galeria .g1 img{object-position:50% 50%}
+  .galeria .g2 img{object-position:50% 25%}
   .progreso{display:none}
   .llamar{display:none}
   .barra{position:fixed;left:0;right:0;bottom:0;z-index:45;display:flex;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:var(--azul);box-shadow:0 -6px 20px rgba(23,34,58,.25)}
@@ -444,9 +455,9 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
     <h2 class="rev" style="margin-bottom:8px">Una esquina de Devoto para hacer una pausa</h2>
     <p class="rev">Desayuno, almuerzo o merienda, en el lugar o para llevar.</p>
     <div class="galeria">
-      <div class="ph rev-img"><img src="lugar-1.jpg" alt="Dos personas sonriendo en la vereda de Divina, junto a unos barriles y una sombrilla" loading="lazy" onerror="this.remove()"></div>
-      <div class="ph rev-img"><img src="lugar-2.jpg" alt="Interior de Divina" loading="lazy" onerror="this.remove()"></div>
-      <div class="ph rev-img"><img src="lugar-3.jpg" alt="Detalle de café y panadería" loading="lazy" onerror="this.remove()"></div>
+      <div class="ph g1 rev-img"><img src="esquina-2.jpg" alt="Vista de la esquina de Divina desde la calle, con la fachada azul y mesas en la vereda" loading="lazy" width="1440" height="810" onerror="this.remove()"></div>
+      <div class="ph g2 rev-img"><img src="esquina-1.jpg" alt="Frente de Divina con el cartel, el toldo azul y las vidrieras" loading="lazy" width="1440" height="810" onerror="this.remove()"></div>
+      <div class="ph g3 rev-img"><img src="lugar-1.jpg" alt="Dos personas sonriendo en la vereda de Divina, junto a unos barriles y una sombrilla" loading="lazy" onerror="this.remove()"></div>
     </div>
   </div>
 </section>
@@ -584,7 +595,7 @@ footer.pie .wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
   <a class="btn btn-rosa" href="https://www.google.com/maps/search/?api=1&query=Divina%20Delicias%20%26%20Amor%2C%20Concordia%204723%2C%20Villa%20Devoto%2C%20Buenos%20Aires" target="_blank" rel="noopener">Cómo llegar</a>
   <a class="btn btn-linea" href="tel:+5491136189773">Llamar</a>
 </div>
-<a class="llamar" href="tel:+5491136189773" aria-label="Llamar a Divina"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.6 3.6a1 1 0 0 1-.25 1z"/></svg>Llamar</a>
+<a class="llamar" href="tel:+5491136189773" aria-label="Llamar a Divina"><span class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.6 3.6a1 1 0 0 1-.25 1z"/></svg></span><span class="txt">Llamar</span></a>
 <button class="subir" type="button" aria-label="Volver arriba">
   <svg class="anillo" viewBox="0 0 64 64" aria-hidden="true"><circle class="base" cx="32" cy="32" r="28"/><circle class="prog" cx="32" cy="32" r="28"/></svg>
   <svg class="up" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
